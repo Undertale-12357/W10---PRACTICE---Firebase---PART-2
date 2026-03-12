@@ -1,18 +1,18 @@
 import 'package:provider/provider.dart';
-import 'package:nested/nested.dart';
-
-import 'Term2/w7/main_common.dart';
-import 'Term2/w7/data/repositories/settings/app_settings_repository_mock.dart';
-import 'Term2/w7/data/repositories/songs/song_repository.dart';
-import 'Term2/w7/data/repositories/songs/song_repository_mock.dart';
-import 'Term2/w7/ui/states/player_state.dart';
-import 'Term2/w7/ui/states/settings_state.dart';
+ 
+import 'main_common.dart';
+import 'data/repositories/settings/app_settings_repository_mock.dart';
+import 'data/repositories/songs/song_repository.dart';
+import 'data/repositories/songs/song_repository_mock.dart';
+import 'ui/states/player_state.dart';
+import 'ui/states/settings_state.dart';
 
 /// Configure provider dependencies for dev environment
-List<SingleChildWidget> get devProviders {
+List<InheritedProvider> get devProviders {
   final appSettingsRepository = AppSettingsRepositoryMock();
 
   return [
+ 
     // 1 - Inject the song repository
     Provider<SongRepository>(create: (_) => SongRepositoryMock()),
 
