@@ -1,6 +1,6 @@
+import 'package:blabla/Term2/w9/ui/screens/artist/artist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:w9_practice/ui/screens/artist/artist_screen.dart';
 import 'ui/screens/library/library_screen.dart';
 import 'ui/screens/settings/settings_screen.dart';
 import 'ui/states/settings_state.dart';

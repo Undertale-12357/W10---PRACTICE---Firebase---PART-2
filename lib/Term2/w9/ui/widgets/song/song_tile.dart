@@ -1,3 +1,4 @@
+import 'package:blabla/Term2/w9/model/artists/artist.dart';
 import 'package:flutter/material.dart';
 
 import '../../../model/songs/song.dart';
@@ -8,9 +9,11 @@ class SongTile extends StatelessWidget {
     required this.song,
     required this.isPlaying,
     required this.onTap,
+    required this.artist,
   });
 
   final Song song;
+  final Artist artist;
   final bool isPlaying;
   final VoidCallback onTap;
 
@@ -28,6 +31,7 @@ class SongTile extends StatelessWidget {
             backgroundImage: NetworkImage(song.imageUrl.toString()),
             radius: 30,
           ),
+          subtitle: Text("${artist.name} - ${artist.genre}"),
           onTap: onTap,
           title: Text(song.title),
           trailing: Text(
