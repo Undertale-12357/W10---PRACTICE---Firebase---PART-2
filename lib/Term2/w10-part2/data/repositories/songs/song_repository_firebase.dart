@@ -7,13 +7,19 @@ import '../../dtos/song_dto.dart';
 import 'song_repository.dart';
 
 class SongRepositoryFirebase extends SongRepository {
+  List<Song>? _cachedSongs;
+
   final Uri songsUri = Uri.https(
     'https://week10-part2-default-rtdb.asia-southeast1.firebasedatabase.app',
     '/songs.json',
   );
 
   @override
-  Future<List<Song>> fetchSongs() async {
+  Future<List<Song>> fetchSongs({bool forceFetch = false}) async {
+    if (!forceFetch && _cachedSongs != null) {
+      return _cachedSongs!;
+    }
+
     final http.Response response = await http.get(songsUri);
 
     if (response.statusCode == 200) {
@@ -24,6 +30,7 @@ class SongRepositoryFirebase extends SongRepository {
       for (final entry in songJson.entries) {
         result.add(SongDto.fromJson(entry.key, entry.value));
       }
+      _cachedSongs = result;
       return result;
     } else {
       // 2- Throw expcetion if any issue
@@ -54,5 +61,8 @@ class SongRepositoryFirebase extends SongRepository {
     } catch (e) {
       throw Exception('Failed to like the song: $e');
     }
+  }
+  void clearCache() {
+    _cachedSongs = null;
   }
 }
