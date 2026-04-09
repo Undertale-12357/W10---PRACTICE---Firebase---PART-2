@@ -1,4 +1,6 @@
+import 'package:blabla/Term2/w10-part2/ui/screens/library/view_model/library_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../view_model/library_item_data.dart';
 
 class LibraryItemTile extends StatelessWidget {
@@ -32,6 +34,19 @@ class LibraryItemTile extends StatelessWidget {
               Text(data.artist.name),
               SizedBox(width: 20),
               Text(data.artist.genre),
+              SizedBox(width: 20),
+              Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.favorite, color: Colors.red),
+                    onPressed: () {
+                      final vm = context.read<LibraryViewModel>();
+                      vm.likeSong(data.song);
+                    },
+                  ),
+                  Text("${data.song.likes ?? 0}"),
+                ],
+              ),
             ],
           ),
           leading: CircleAvatar(
